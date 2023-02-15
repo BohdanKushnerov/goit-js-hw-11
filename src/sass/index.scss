@@ -29,7 +29,18 @@
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  gap: 20px;
+  // justify-content: space-around;
+}
+
+// .gallery__link {
+//   display: block;
+
+// }
+.gallery__link > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .photo-card {
