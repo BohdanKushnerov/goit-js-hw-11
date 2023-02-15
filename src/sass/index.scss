@@ -1,2 +1,49 @@
-@import './common';
-@import './example';
+// @import './common';
+// @import './example';
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.search-form input {
+  background-color: rgb(108, 155, 155);
+}
+
+.search-form button {
+  background-color: tomato;
+}
+
+.load-more {
+  display: block;
+  margin: 0 auto;
+
+  background-color: tomato;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.photo-card {
+  max-width: 300px;
+  height: auto;
+}
+
+.photo-card > img{
+  max-width: 300px;
+  display: block;
+}
+
+.info {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
