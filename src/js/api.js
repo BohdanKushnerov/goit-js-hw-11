@@ -17,6 +17,8 @@ export default class ApiService {
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
+        page: `${this.page}`,
+        per_page: 40,
       },
     }).then(({ data }) => {
       this.incrementPage();
