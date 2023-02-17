@@ -9,8 +9,8 @@ export default class ApiService {
     this.page = 1;
   }
 
-  fetchImages() {
-    return axios.get(BASE_URL, {
+  async fetchImages() {
+    const res = await axios.get(BASE_URL, {
       params: {
         key: '33648762-c4caeb57f8348b72b000e69b2',
         q: `${this.searchQuery}`,
@@ -20,11 +20,9 @@ export default class ApiService {
         page: `${this.page}`,
         per_page: 40,
       },
-    }).then(({ data }) => {
-      this.incrementPage();
-      console.log(data);
-      return data;
     });
+    this.incrementPage();
+    return res.data
   }
 
   incrementPage() {
