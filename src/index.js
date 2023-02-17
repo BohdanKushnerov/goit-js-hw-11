@@ -8,6 +8,8 @@ const formRef = document.querySelector('.search-form');
 const divRef = document.querySelector('.gallery');
 const btnRef = document.querySelector('.load-more');
 
+
+
 const apiService = new ApiService();
 const lightbox = new SimpleLightbox('.gallery a');
 
@@ -20,16 +22,24 @@ function onSearch(e) {
   e.preventDefault();
   apiService.query = e.currentTarget.elements.searchQuery.value;
 
+  if(!apiService.query) {
+    Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+      return;
+  }
+
   apiService.resetPage();
   apiService.fetchImages().then(data => {
+    if(!data.hits.length) {
+      Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+        return;
+    }
+
     clearContainer();
     Notify.info(`Hooray! We found ${data.totalHits} images.`);
     makeMarkup(data.hits);
     btnRef.classList.remove('is-hidden');
   });
 }
-
-
 
 function loadMore() {
   apiService.fetchImages().then(data => {
@@ -73,10 +83,22 @@ function makeMarkup(hits) {
     divRef.insertAdjacentHTML('beforeend', markup);
 
     lightbox.refresh();
+    smoothScroll();
   });
 }
 
 function clearContainer() {
   divRef.innerHTML = '';
+}
+
+function smoothScroll() {
+  const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: "smooth",
+})
 }
 
