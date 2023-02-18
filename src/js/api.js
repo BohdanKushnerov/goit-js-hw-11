@@ -7,7 +7,7 @@ export default class ApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-    this._perPage = 120;
+    this._perPage = 40;
     this.totalImages = 0;
   }
 
@@ -20,7 +20,7 @@ export default class ApiService {
         orientation: 'horizontal',
         safesearch: true,
         page: `${this.page}`,
-        per_page: `${this.per_page}`,
+        per_page: `${this._perPage}`,
       },
     });
     this.incrementPage();

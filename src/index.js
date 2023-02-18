@@ -31,7 +31,7 @@ async function onSearch(e) {
 
     apiService.resetPage();
     apiService.resetQuantityImages();
-    apiService._perPage = 120;
+    apiService._perPage = 40;
     btnRef.disabled = false;
 
     const {hits, totalHits} = await apiService.fetchImages(); //data
@@ -43,6 +43,8 @@ async function onSearch(e) {
     clearContainer();
     Notify.info(`Hooray! We found ${totalHits} images.`);
     makeMarkup(hits);
+
+    smoothScroll()
     btnRef.classList.remove('is-hidden');
   } catch (error) {
     Notify.failure(
@@ -55,6 +57,8 @@ async function loadMore() {
   const {hits, totalHits} = await apiService.fetchImages(); //data
 
   makeMarkup(hits);
+
+  smoothScroll()
 
   // if(apiService.totalImages === 480) {
   //   apiService.perPage = 20;
@@ -70,7 +74,7 @@ async function loadMore() {
   }
 }
 
-function makeMarkup(hits) {
+async function makeMarkup(hits) {
   hits.forEach(el => {
     const {
       webformatURL,
@@ -106,8 +110,6 @@ function makeMarkup(hits) {
     divRef.insertAdjacentHTML('beforeend', markup);
 
     lightbox.refresh();
-
-    // smoothScroll()
   });
 }
 
@@ -120,7 +122,7 @@ function smoothScroll() {
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
 
-    console.log(cardHeight)
+    console.log("cardHeight:", cardHeight)
 
   window.scrollBy({
     top: cardHeight * 2,
