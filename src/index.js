@@ -17,8 +17,8 @@ const lightbox = new SimpleLightbox('.gallery a');
 formRef.addEventListener('submit', onSearch);
 btnRef.addEventListener('click', loadMore);
 inputRef.addEventListener('input', () => {
-  formBtnRef.disabled = false
-})
+  formBtnRef.disabled = false;
+});
 
 btnRef.classList.add('is-hidden');
 
@@ -34,8 +34,8 @@ async function onSearch(e) {
     apiService._perPage = 40;
     btnRef.disabled = false;
 
-    const {hits, totalHits} = await apiService.fetchImages(); //data
-    // console.log(hits);
+    const { hits, totalHits } = await apiService.fetchImages(); //data
+
     if (!hits.length) throw new Error();
 
     formBtnRef.disabled = true;
@@ -44,7 +44,8 @@ async function onSearch(e) {
     Notify.info(`Hooray! We found ${totalHits} images.`);
     makeMarkup(hits);
 
-    smoothScroll()
+    smoothScroll();
+
     btnRef.classList.remove('is-hidden');
   } catch (error) {
     Notify.failure(
@@ -54,23 +55,18 @@ async function onSearch(e) {
 }
 
 async function loadMore() {
-  const {hits, totalHits} = await apiService.fetchImages(); //data
-
+  const { hits, totalHits } = await apiService.fetchImages(); //data
   makeMarkup(hits);
-
-  smoothScroll()
-
-  // if(apiService.totalImages === 480) {
-  //   apiService.perPage = 20;
-  // }
-
-  if(apiService.totalImages >= totalHits - apiService.perPage) {
+  smoothScroll();
+  if (apiService.totalImages >= totalHits - apiService.perPage) {
     apiService.perPage = totalHits - apiService.totalImages;
   }
 
-  if(apiService.totalImages >= totalHits) {
+  if (apiService.totalImages >= totalHits) {
     btnRef.disabled = true;
-    Notify.failure("We're sorry, but you've reached the end of search results.")
+    Notify.failure(
+      "We're sorry, but you've reached the end of search results."
+    );
   }
 }
 
@@ -118,14 +114,21 @@ function clearContainer() {
 }
 
 function smoothScroll() {
+  if (apiService.page <= 2) {
+    return;
+  }
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
 
-    console.log("cardHeight:", cardHeight)
+  console.log('cardHeight:', cardHeight);
 
   window.scrollBy({
     top: cardHeight * 2,
     behavior: 'smooth',
   });
+
+  // console.log('window.scrollY: ',window.scrollY)
+  // console.log('window.innerHeight: ', window.innerHeight)
+  // console.log('document.documentElement.scrollHeight: ', document.documentElement.scrollHeight)
 }
