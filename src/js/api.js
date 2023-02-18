@@ -7,6 +7,8 @@ export default class ApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this._perPage = 120;
+    this.totalImages = 0;
   }
 
   async fetchImages() {
@@ -18,10 +20,12 @@ export default class ApiService {
         orientation: 'horizontal',
         safesearch: true,
         page: `${this.page}`,
-        per_page: 40,
+        per_page: `${this.per_page}`,
       },
     });
     this.incrementPage();
+    this.incrementQuantityImages();
+    console.log(this)
     return res.data
   }
 
@@ -39,5 +43,21 @@ export default class ApiService {
 
   set query(newQuery) {
     this.searchQuery = newQuery;
+  }
+
+  incrementQuantityImages() {
+    this.totalImages += this._perPage;
+  }
+
+  resetQuantityImages() {
+    this.totalImages = 0;
+  }
+
+  get perPage() {
+    return this._perPage;
+  }
+
+  set perPage(newValue) {
+    this._perPage = newValue;
   }
 }
