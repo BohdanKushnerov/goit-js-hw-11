@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://pixabay.com/api/';
-// const KEY = 'key=33648762-c4caeb57f8348b72b000e69b2';
 
 export default class ApiService {
   constructor() {
@@ -9,23 +8,27 @@ export default class ApiService {
     this.page = 1;
     this._perPage = 40;
     this.totalImages = 0;
+    this.key = '33648762-c4caeb57f8348b72b000e69b2';
+    this.imageType = 'photo';
+    this.orientation = 'horizontal';
+    this.safesearch = true;
   }
 
   async fetchImages() {
     const res = await axios.get(BASE_URL, {
       params: {
-        key: '33648762-c4caeb57f8348b72b000e69b2',
+        key: `${this.key}`,
         q: `${this.searchQuery}`,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
+        image_type: `${this.imageType}`,
+        orientation: `${this.orientation}`,
+        safesearch: `${this.safesearch}`,
         page: `${this.page}`,
         per_page: `${this._perPage}`,
       },
     });
     this.incrementPage();
     this.incrementQuantityImages();
-    console.log(this)
+    console.log(this);
     return res.data
   }
 

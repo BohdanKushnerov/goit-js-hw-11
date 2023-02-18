@@ -38,32 +38,32 @@ body {
   fill:#0a0b5f
 }
 
-.load-more {
-  display: block;
-  margin: 0 auto;
-  padding: 10px 24px;
+// .load-more {
+//   display: block;
+//   margin: 0 auto;
+//   padding: 10px 24px;
 
-  min-width: 100px;
+//   min-width: 100px;
 
-  font-size: 16px;
-  line-height: 1.88;
-  letter-spacing: .06em;
-  border-radius: 4px;
-  border: none;
-  color: #fff;
-  background-color: tomato;
-  cursor: pointer;
-}
+//   font-size: 16px;
+//   line-height: 1.88;
+//   letter-spacing: .06em;
+//   border-radius: 4px;
+//   border: none;
+//   color: #fff;
+//   background-color: tomato;
+//   cursor: pointer;
+// }
 
-.is-hidden {
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  width: 1px;
-}
+// .is-hidden {
+//   overflow: hidden;
+//   position: absolute;
+//   white-space: nowrap;
+//   clip: rect(0 0 0 0);
+//   clip-path: inset(50%);
+//   height: 1px;
+//   width: 1px;
+// }
 
 .gallery {
   display: flex;
